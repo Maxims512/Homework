@@ -1,9 +1,7 @@
 #include<iostream>
 #include<list>
 
-using namespace std;
-
-bool inList(list<int> list, int ch){
+using namespace std;фbФ/ф/фФфффФnФL\Фi/\ФФ\фlist<int> list, int ch){
     for (auto i = list.begin(); i != list.end(); i++){
         if(*i==ch) return true;
     }
