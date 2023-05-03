@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
-
+#include <queue>
 #include <stack>
+#include <cmath>
 using namespace std;
 
 struct tree{ //узел
@@ -74,9 +75,48 @@ int heigh(tree *tr)
         return heigh(tr->left) + 1;
     else
         return heigh(tr->right) + 1;
- 
 }
 
+
+void print(tree *tr, int k){
+    if (! tr ) cout << "Empty tree\n";
+
+    else{
+        queue<tree*> cur, next;
+        tree *r = tr;
+        cur.push(r);
+        int j = 0;
+        while (cur.size()){
+            if (j == 0) {
+                for (int i = 0; i < (int)pow(2.0, k)  -  1; i++)
+                    cout << ' ';
+            }
+
+            tree *buf = cur.front() ;
+            cur.pop();
+            j++;
+            if (buf){
+                cout << buf->inf;
+                next.push(buf ->left);
+                next.push(buf ->right);
+                for (int i = 0; i < (int)pow(2.0, k + 1) - 1; i++)
+                    cout << ' ';
+            }
+
+            if (!buf){
+                for (int i = 0; i < (int)pow(2.0 , k + 1)  - 1; i++)
+                    cout << ' ';
+                cout << ' ';
+            }
+            if(cur.empty()){
+                cout << endl;
+                swap(cur, next);
+                j = 0;
+                k--;
+            }
+        }
+    }
+}
 
 int main(){
     int x;
@@ -86,7 +126,11 @@ int main(){
         cin >> x;
         insert (tr , x);
     }
+
+    int k = int(log((float)9)/log((float)2.0));
+    print(tr, k);
     cout << endl;
+
     inorder(tr);
 
     cout<<endl<<heigh(tr);

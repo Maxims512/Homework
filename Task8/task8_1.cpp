@@ -16,7 +16,7 @@ tree* newTree(int key)
 	return (temp);
 }
 
-void printLevelOrder(tree* tr){
+void print(tree* tr){
 	if (!tr)
 		return;
 
@@ -45,7 +45,7 @@ tree* deleteEven(tree* tree){
 	tree->left = deleteEven(tree->left);
 	tree->right = deleteEven(tree->right);
 
-	if (tree->data % 2 == 0 && !tree->right && !tree->left)
+	if ((tree->data % 2 != 0) && !tree->right && !tree->left)
 		return NULL;
 
 	return tree;
@@ -62,10 +62,10 @@ int main()
 	tr->right->right = newTree(5);
 	tr->right->right->right = newTree(4);
 
-    printLevelOrder(tr);
+    print(tr);
     cout<<endl;
 
 	tree *tr1 = deleteEven(tr);
 
-	printLevelOrder(tr1);
+	print(tr1);
 }
